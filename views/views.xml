@@ -1,0 +1,60 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+<!--
+    <record model="ir.ui.view" id="astrum_intesa.list">
+      <field name="name">astrum_intesa list</field>
+      <field name="model">astrum_intesa.astrum_intesa</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="value"/>
+          <field name="value2"/>
+        </tree>
+      </field>
+    </record>
+-->
+
+    <!-- actions opening views on models -->
+<!--
+    <record model="ir.actions.act_window" id="astrum_intesa.action_window">
+      <field name="name">astrum_intesa window</field>
+      <field name="res_model">astrum_intesa.astrum_intesa</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+-->
+
+    <!-- server action to the one above -->
+<!--
+    <record model="ir.actions.server" id="astrum_intesa.action_server">
+      <field name="name">astrum_intesa server</field>
+      <field name="model_id" ref="model_astrum_intesa_astrum_intesa"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": model._name,
+        }
+      </field>
+    </record>
+-->
+
+    <!-- Top menu item -->
+<!--
+    <menuitem name="astrum_intesa" id="astrum_intesa.menu_root"/>
+-->
+    <!-- menu categories -->
+<!--
+    <menuitem name="Menu 1" id="astrum_intesa.menu_1" parent="astrum_intesa.menu_root"/>
+    <menuitem name="Menu 2" id="astrum_intesa.menu_2" parent="astrum_intesa.menu_root"/>
+-->
+    <!-- actions -->
+<!--
+    <menuitem name="List" id="astrum_intesa.menu_1_list" parent="astrum_intesa.menu_1"
+              action="astrum_intesa.action_window"/>
+    <menuitem name="Server to list" id="astrum_intesa" parent="astrum_intesa.menu_2"
+              action="astrum_intesa.action_server"/>
+-->
+  </data>
+</odoo>
