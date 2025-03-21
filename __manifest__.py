@@ -18,8 +18,7 @@ Módulo de integración con Intesa",
     'depends': ['base','purchase','account'],
 
     'data': [
-        'views/views.xml',
-        'views/templates.xml',
+        'views/purchase_order_line.xml',
     ]
 }
 
