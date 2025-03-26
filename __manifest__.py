@@ -15,10 +15,10 @@ Módulo de integración con Intesa",
     'version': '1.0',
     'license': 'LGPL-3',
 
-    'depends': ['base','purchase','account'],
+    'depends': ['base', 'purchase', 'account', 'analytic'],
 
     'data': [
         'views/purchase_order_line.xml',
+        'views/analytic_distribution_report.xml',
     ]
 }
-

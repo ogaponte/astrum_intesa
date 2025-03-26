@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Define the report action -->
+        <record id="action_analytic_distribution_report" model="ir.actions.act_window">
+            <field name="name">Distribución Analítica - Flujo de Dinero</field>
+            <field name="res_model">purchase.order.line</field>
+            <field name="view_mode">pivot,graph,tree</field>
+            <field name="context">{'search_default_groupby_analytic_distribution': 1}</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    No hay datos disponibles para mostrar
+                </p>
+            </field>
+        </record>
+
+        <!-- Create a pivot view for the report -->
+        <record id="view_analytic_distribution_pivot" model="ir.ui.view">
+            <field name="name">purchase.order.line.pivot.analytic</field>
+            <field name="model">purchase.order.line</field>
+            <field name="arch" type="xml">
+                <pivot string="Distribución Analítica - Flujo de Dinero" sample="1">
+                    <field name="analytic_distribution_key" type="row"/>
+                    <field name="order_id" type="row"/>
+                    <field name="price_subtotal" type="measure" string="Entrada de Dinero"/>
+                    <field name="money_exit" type="measure" string="Salida de Dinero"/>
+                    <field name="price_total" type="measure" string="Total con Impuestos"/>
+                </pivot>
+            </field>
+        </record>
+
+        <!-- Create a graph view for the report -->
+        <record id="view_analytic_distribution_graph" model="ir.ui.view">
+            <field name="name">purchase.order.line.graph.analytic</field>
+            <field name="model">purchase.order.line</field>
+            <field name="arch" type="xml">
+                <graph string="Distribución Analítica - Flujo de Dinero" type="bar" sample="1">
+                    <field name="analytic_distribution_key"/>
+                    <field name="price_subtotal" type="measure" string="Entrada de Dinero"/>
+                    <field name="money_exit" type="measure" string="Salida de Dinero"/>
+                </graph>
+            </field>
+        </record>
+
+        <!-- Create a tree view for the report -->
+        <record id="view_analytic_distribution_tree" model="ir.ui.view">
+            <field name="name">purchase.order.line.tree.analytic</field>
+            <field name="model">purchase.order.line</field>
+            <field name="arch" type="xml">
+                <tree string="Distribución Analítica - Flujo de Dinero" create="0" delete="0">
+                    <field name="order_id"/>
+                    <field name="partner_id"/>
+                    <field name="date_order"/>
+                    <field name="analytic_distribution_key"/>
+                    <field name="name"/>
+                    <field name="price_subtotal" sum="Total Entrada"/>
+                    <field name="money_exit" sum="Total Salida"/>
+                    <field name="price_total" sum="Total con Impuestos"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Add a search view for the report -->
+        <record id="view_analytic_distribution_search" model="ir.ui.view">
+            <field name="name">purchase.order.line.search.analytic</field>
+            <field name="model">purchase.order.line</field>
+            <field name="arch" type="xml">
+                <search string="Distribución Analítica - Búsqueda">
+                    <field name="analytic_distribution_key"/>
+                    <field name="order_id"/>
+                    <field name="partner_id"/>
+                    <filter string="Confirmado" name="state_purchase" domain="[('state', '=', 'purchase')]"/>
+                    <filter string="Cancelado" name="state_cancel" domain="[('state', '=', 'cancel')]"/>
+                    <filter string="Distribución Analítica" name="groupby_analytic_distribution" domain="[]" context="{'group_by': 'analytic_distribution_key'}"/>
+                    <filter string="Proveedor" name="groupby_partner" domain="[]" context="{'group_by': 'partner_id'}"/>
+                    <filter string="Orden" name="groupby_order" domain="[]" context="{'group_by': 'order_id'}"/>
+                    <filter string="Mes" name="groupby_month" domain="[]" context="{'group_by': 'date_order:month'}"/>
+                </search>
+            </field>
+        </record>
+
+        <!-- Add menu item for the report -->
+        <menuitem id="menu_analytic_distribution_report" 
+                  name="Flujo de Dinero por Distribución Analítica"
+                  action="action_analytic_distribution_report" 
+                  parent="purchase.menu_procurement_management" 
+                  sequence="8"/>
+    </data>
+</odoo>
